@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple E-Commerce</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #feffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        #product-list {
+            margin-bottom: 30px;
+        }
+
+        .product {
+            background-color: #333333;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .product button {
+            background-color: #6200ea;
+            border: none;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product button:hover {
+            background-color: #3700b3;
+        }
+
+        #cart-items {
+            margin-bottom: 20px;
+        }
+
+        #cart-total {
+            text-align: right;
+        }
+
+        #checkout-btn {
+            background-color: #6200ea;
+            border: none;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #checkout-btn:hover {
+            background-color: #3700b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Products</h1>
+        <div id="product-list">
+            <!-- Products will be dynamically added here by JavaScript -->
+        </div>
+
+        <h2>Shopping Cart</h2>
+        <div id="cart-items">
+            <p id="empty-cart">Your cart is empty.</p>
+        </div>
+        <div id="cart-total" >
+            <p>Total: <span id="total-price">$0.00</span></p>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
