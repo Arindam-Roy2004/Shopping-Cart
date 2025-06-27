@@ -77,15 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     checkoutButton.addEventListener('click', () => {
-        cart.length = 0;
-        alert('Thank you for your purchase!');
-        renderCart();
+        if (cart.length > 0) {
+            cart.length = 0;
+            alert('Thank you for your purchase!');
+            renderCart();
+
+        }
     });
 
     clearCartButton.addEventListener('click', () => {
-        cart.length = 0;
-        alert('Cart cleared!');
-        renderCart();
+        if (cart.length > 0) {
+            cart.length = 0;
+            alert('Cart cleared!');
+            renderCart();
+        }
     });
 
     cartList.addEventListener('click', (e) => {
