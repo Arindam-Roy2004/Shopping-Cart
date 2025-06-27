@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartTotal = document.getElementById('cart-total');
     const priceTotal = document.getElementById('total-price');
     const checkoutButton = document.getElementById('checkout-btn');
+    const clearCartButton = document.getElementById('clear-cart-btn');
 
     let cart = [];
 
@@ -29,53 +30,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     productList.addEventListener('click', (e) => {
         if (e.target.tagName === 'BUTTON') {
-            // console.log('Add to Cart button clicked');
             const productId = parseInt(e.target.getAttribute('data-id'));
             const product = products.find(p => p.id === productId);
             if (product) {
-                // console.log(`Adding ${product.name} to cart of price $${product.price.toFixed(2)}`);
                 addToCart(product);
             }
         }
     });
 
     function addToCart(product) {
-        cart.push(product);
+        const cartItem = cart.find(item => item.id === product.id);
+        if (cartItem) {
+            cartItem.quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
         renderCart();
     }
 
     function renderCart() {
-        console.log(cart);
         cartList.innerHTML = '';
-        // console.log(cartList.innerHTML);
         let totalPrice = 0;
         if (cart.length > 0) {
-            // console.log(emptyCartMessage.classList.add('hidden'));
             emptyCartMessage.classList.add('hidden');
             cartTotal.classList.remove('hidden');
-            // Calculate and display total price
-            cart.forEach(item => {
-                totalPrice += item.price;
+            cart.forEach((item, index) => {
+                totalPrice += item.price * item.quantity;
                 const cartItem = document.createElement('div');
+                cartItem.style.display = 'flex';
+                cartItem.style.alignItems = 'center';
                 cartItem.innerHTML = `
-                ${item.name} - $${item.price.toFixed(2)}
-            `;
+                    <span style="font-size: 16px; margin-right: 8px;">
+                        ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}
+                    </span>
+                    <button class="remove-from-cart" data-index="${index}">
+                        <img src="image.png" alt="Remove from Cart" style="width:16px; height:16px; vertical-align:middle;">
+                    </button>
+                `;
                 cartList.appendChild(cartItem);
             });
             priceTotal.textContent = `${totalPrice.toFixed(2)}`;
-        }
-        else {
+        } else {
             emptyCartMessage.classList.remove('hidden');
-            // cartTotal.classList.add('hidden');
             priceTotal.textContent = `$0.00`;
-            // priceTotal.classList.add('hidden');
         }
     }
+
     checkoutButton.addEventListener('click', () => {
         cart.length = 0;
         alert('Thank you for your purchase!');
         renderCart();
     });
 
+    clearCartButton.addEventListener('click', () => {
+        cart.length = 0;
+        alert('Cart cleared!');
+        renderCart();
+    });
+
+    cartList.addEventListener('click', (e) => {
+        if (e.target.closest('.remove-from-cart')) {
+            const button = e.target.closest('.remove-from-cart');
+            const index = parseInt(button.getAttribute('data-index'));
+            if (!isNaN(index)) {
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity -= 1;
+                } else {
+                    cart.splice(index, 1);
+                }
+                renderCart();
+            }
+        }
+    });
 
 });
+
+

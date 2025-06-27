@@ -59,7 +59,12 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
+        .product button.remove-from-cart {
+            background-color: white;
+        }
+        .product button.remove-from-cart:hover {
+            background-color: #c3c0c0;
+        }
         .product button:hover {
             background-color: #3700b3;
         }
@@ -85,7 +90,23 @@
         #checkout-btn:hover {
             background-color: #3700b3;
         }
-
+        #clear-cart-btn{
+            /* display: block;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: 0; */
+            background-color: #6200ea;
+            border: none;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #clear-cart-btn:hover {
+            background-color: #3700b3;
+        }
         .hidden {
             display: none;
         }
@@ -104,11 +125,15 @@
             <p id="empty-cart">Your cart is empty.</p>
         </div>
         <div id="cart-total" >
-            <p>Total: <span id="total-price">$0.00</span></p>
+            <p style="margin-bottom: 16px; text-align: right; margin-right: 17px;">
+                Total: <span id="total-price">$0.00</span>
+            </p>
             <button id="checkout-btn">Checkout</button>
+            <button id="clear-cart-btn">
+                <img src="image copy.png" alt="Clear Cart" style="width:15px; height: 15px; vertical-align:middle;">
+            </button>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 
